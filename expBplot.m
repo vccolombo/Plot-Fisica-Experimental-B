@@ -21,6 +21,12 @@ plot1 = errorbar(X, y1, X_err, X_err, y1_err, y1_err, "~>");
 set(plot1, 
   "color", "k", 
   "marker", ".", 
-  "markersize", 10,
+  "markersize", 6,
   "linestyle", "-",
-  "linewidth", 2);
+  "linewidth", 1);
+title("Titulo");
+xlabel("Eixo X");
+ylabel("Eixo Y");
+legend("Legenda1");
+
+#pause
