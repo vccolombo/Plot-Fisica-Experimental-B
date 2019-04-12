@@ -2,15 +2,25 @@ fileName = "Planinha_Experimento4.ods";
 planilha = "Planilha1";
 cells = "A9:L58";
 
-# TODO: checar se ja instalou e instalar se nao
+# TODO: checar se ja instalou, e instalar se nao
 pkg load io
 data = odsread(fileName, planilha, cells);
 
 X_column = 1;
 X = data(:, X_column);
 
+X_err_column = 2;
+X_err = data(:, X_err_column);
+
 y1_column = 7;
 y1 = data(:, y1_column);
+y1_err_column = 8;
+y1_err = data(:, y1_err_column);
 
-plot(X, y1, ".", "markersize", 10, "color", "k", "linestyle", '-', "linewidth", 2);
-
+plot1 = errorbar(X, y1, X_err, X_err, y1_err, y1_err, "~>");
+set(plot1, 
+  "color", "k", 
+  "marker", ".", 
+  "markersize", 10,
+  "linestyle", "-",
+  "linewidth", 2);
