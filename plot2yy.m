@@ -1,3 +1,10 @@
+# Plota duas curvas, sendo Y1 o eixo Y da esquerda e Y2 o eixo Y da direita
+# tit = titulo
+# xl = Nome do eixo X
+# yl1 = Nome do eixo Y da esquerda
+# yl2 = Nome do eixo Y da direita
+# leg1 = Legenda da curva Y1
+# leg2 = Legenda da curva Y2
 function plot2yy(X, Y1, Y2, X_err, Y1_err, Y2_err, tit, xl, yl1, yl2, leg1, leg2)
   ax = plotyy(X, Y1, X, Y2);
   hold(ax(1), 'on');
