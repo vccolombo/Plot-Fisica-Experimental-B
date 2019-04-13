@@ -18,6 +18,8 @@ function plot2yy(X, Y1, Y2,
   marker1 = ".", marker2 = "o")
   
   ax = plotyy(X, Y1, X, Y2);
+  set(ax, {'ycolor'}, {color1; color2});
+  
   hold(ax(1), 'on');
   h(1) = errorbar(ax(1), X, Y1, X_err, X_err, Y1_err, Y1_err, "~>");
   hold(ax(2), 'on');
