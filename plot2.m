@@ -20,7 +20,19 @@ function plot2(X, Y1, Y2,
   h(1) = errorbar(X, Y1, X_err, X_err, Y1_err, Y1_err, "~>");
   h(2) = errorbar(X, Y2, X_err, X_err, Y2_err, Y2_err, "~>");
   
-  [a, b] = plotInterval(X);
+  # Polinomial Fit part
+  x = linspace(min(X), max(X), 101);
+  p1 = splinefit(X, Y1, breaks = 10);
+  y1 = ppval(p1, x);
+  plot(x, y1, '-', "color", color1);
+  
+  p2 = splinefit(X, Y2, breaks = 10);
+  y2 = ppval(p2, x);
+  plot(x, y2, '-', "color", color2);
+  # End Polinomial Fit Part
+  
+  # Parameters part
+  [a, b] = plotInterval(X); # Choose Interval of graph
 
   title(tit);
   xlabel(xl);
@@ -29,8 +41,10 @@ function plot2(X, Y1, Y2,
   legend(h, leg1, leg2);
   set(h(1), 
     "color", color1,
-    "marker", marker1);
+    "marker", marker1,
+    "linestyle", "none");
   set(h(2), 
     "color", color2,
-    "marker", marker2);
+    "marker", marker2,
+    "linestyle", "none");
 endfunction

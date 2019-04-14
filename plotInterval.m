@@ -1,5 +1,6 @@
 function [a, b] = plotInterval(X)
-  L = 21; # folha A4
+# TODO correct interval
+  L = 70;
   minimum = min(X);
   maximum = max(X);
   D = ceil(maximum / L);
