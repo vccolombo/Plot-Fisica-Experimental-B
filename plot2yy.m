@@ -17,13 +17,26 @@ function plot2yy(X, Y1, Y2,
   color1 = "b", color2 = "r",
   marker1 = ".", marker2 = "o")
   
-  ax = plotyy(X, Y1, X, Y2);
+  [ax, g1, g2] = plotyy(X, Y1, X, Y2);
   set(ax, {'ycolor'}, {color1; color2});
+  set(g1, "linestyle", "none");
+  set(g2, "linestyle", "none");
   
-  hold(ax(1), 'on');
+  
+  hold on;
   h(1) = errorbar(ax(1), X, Y1, X_err, X_err, Y1_err, Y1_err, "~>");
-  hold(ax(2), 'on');
   h(2) = errorbar(ax(2), X, Y2, X_err, X_err, Y2_err, Y2_err, "~>");
+  
+  # Polinomial Fit part
+  x = linspace(min(X), max(X), 101);
+  p1 = splinefit(X, Y1, breaks = 10);
+  y1 = ppval(p1, x);
+  plot(ax(1), x, y1, '-', "color", color1);
+  
+  p2 = splinefit(X, Y2, breaks = 10);
+  y2 = ppval(p2, x);
+  plot(ax(2), x, y2, '-', "color", color2);
+  # End Polinomial Fit Part
  
   [a, b] = plotInterval(X);
 
@@ -36,8 +49,10 @@ function plot2yy(X, Y1, Y2,
   legend(h, leg1, leg2);
   set(h(1), 
     "color", color1,
-    "marker", marker1);
+    "marker", marker1,
+    "linestyle", "none");
   set(h(2), 
     "color", color2,
-    "marker", marker2);
+    "marker", marker2,
+    "linestyle", "none");
 endfunction

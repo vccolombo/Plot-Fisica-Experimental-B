@@ -38,7 +38,7 @@ function plot2(X, Y1, Y2,
   xlabel(xl);
   xlim([a, b]);
   ylabel(yl);
-  legend(h, leg1, leg2);
+  legend(h, leg1, leg2); # TODO fix legend
   set(h(1), 
     "color", color1,
     "marker", marker1,
