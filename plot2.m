@@ -13,6 +13,7 @@ function plot2(X, Y1, Y2,
   tit, 
   xl, yl, 
   leg1, leg2, 
+  fit = true,
   color1 = "b", color2 = "r",
   marker1 = ".", marker2 = "o")
   
@@ -20,16 +21,18 @@ function plot2(X, Y1, Y2,
   h(1) = errorbar(X, Y1, X_err, X_err, Y1_err, Y1_err, "~>");
   h(2) = errorbar(X, Y2, X_err, X_err, Y2_err, Y2_err, "~>");
   
-  # Polinomial Fit part
-  x = linspace(min(X), max(X), 101);
-  p1 = splinefit(X, Y1, breaks = 10);
-  y1 = ppval(p1, x);
-  plot(x, y1, '-', "color", color1);
-  
-  p2 = splinefit(X, Y2, breaks = 10);
-  y2 = ppval(p2, x);
-  plot(x, y2, '-', "color", color2);
-  # End Polinomial Fit Part
+  if (fit == true)
+    # Polinomial Fit part
+    x = linspace(min(X), max(X), 101);
+    p1 = splinefit(X, Y1, breaks = 10);
+    y1 = ppval(p1, x);
+    plot(x, y1, '-', "color", color1);
+    
+    p2 = splinefit(X, Y2, breaks = 10);
+    y2 = ppval(p2, x);
+    plot(x, y2, '-', "color", color2);
+    # End Polinomial Fit Part
+  endif
   
   # Parameters part
   [a, b] = plotInterval(X); # Choose Interval of graph

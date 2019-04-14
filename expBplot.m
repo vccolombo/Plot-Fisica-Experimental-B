@@ -36,12 +36,12 @@ grid on;
 pause
 clf
 
-plot2(X, y1, y2, X_err, y1_err, y2_err, 
+plot2(X, y1, y2, X_err, y1_err, y2_err,
   "Grafico 2: Valores de Potencia Util Pu e Potencia Total Pt em funcao da Resistencia R", 
   "Resistencia R (Ohm)",
   "Potencia Pu, Pt (W)",
   "Potencia Util Pu", "Potencia Total Pt");
 grid on;
-  
+
 # Descomente a linha abaixo para pausar a execuçao e ver o grafico
 # pause
