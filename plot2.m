@@ -13,15 +13,36 @@ function plot2(X, Y1, Y2,
   tit, 
   xl, yl, 
   leg1, leg2, 
-  fit = true,
-  color1 = "b", color2 = "r",
-  marker1 = ".", marker2 = "o")
+  varargin)
+  
+  # input parsing
+  fit    = "yes";
+  color1 = "r";
+  color2 = "b";
+  marker1  = ".";
+  marker2  = "o";
+  
+  for argidx = 1:2:length(varargin)
+    switch varargin{argidx}
+      case "fit"
+        fit = varargin{argidx+1};
+      case "color1"
+        color1 = varargin{argidx+1};
+      case "color2"
+        color2 = varargin{argidx+1};
+      case "marker1"
+        marker1 = varargin{argidx+1};
+      case "marker2"
+        marker2 = varargin{argidx+1};
+    endswitch
+  endfor 
+  # end of input parsing
   
   hold on;
   h(1) = errorbar(X, Y1, X_err, X_err, Y1_err, Y1_err, "~>");
   h(2) = errorbar(X, Y2, X_err, X_err, Y2_err, Y2_err, "~>");
   
-  if (fit == true)
+  if (strcmp(fit, "yes")) # plot a exponential fit if requested
     # Polinomial Fit part
     x = linspace(min(X), max(X), 101);
     p1 = splinefit(X, Y1, breaks = 10);
