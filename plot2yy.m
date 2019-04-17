@@ -17,7 +17,7 @@ function plot2yy(X, Y1, Y2,
   varargin = {})
   
   # input parsing
-  fit    = "yes";
+  fit    = "no"; # does not fit by default
   color1 = "r";
   color2 = "b";
   marker1  = ".";
@@ -40,7 +40,7 @@ function plot2yy(X, Y1, Y2,
   # end of input parsing
   
   [ax, g1, g2] = plotyy(X, Y1, X, Y2);
-  set(ax, {'ycolor'}, {color1; color2});
+  set(ax, {'ycolor'}, {"k"; "k"});
   set(g1, "linestyle", "none");
   set(g2, "linestyle", "none");
   
@@ -49,7 +49,7 @@ function plot2yy(X, Y1, Y2,
   h(1) = errorbar(ax(1), X, Y1, X_err, X_err, Y1_err, Y1_err, "~>");
   h(2) = errorbar(ax(2), X, Y2, X_err, X_err, Y2_err, Y2_err, "~>");
   
-  if (strcmp(fit, "yes")) # plot a exponential fit if requested
+  if (strcmp(fit, "exp")) # plot a exponential fit if requested
     # Polinomial Fit part
     x = linspace(min(X), max(X), 101);
     p1 = splinefit(X, Y1, breaks = 10);
@@ -60,6 +60,16 @@ function plot2yy(X, Y1, Y2,
     y2 = ppval(p2, x);
     plot(ax(2), x, y2, '-', "color", color2);
     # End Polinomial Fit Part
+  endif
+  
+  if (strcmp(fit, "linear")) # plot a linear fit if requested
+    theta1 = linReg(X, Y1);
+    y1 = theta1(1) + theta1(2)*X;
+    plot(ax(1), X, y1, '-', "color", color1);
+    
+    theta2 = linReg(X, Y2);
+    y2 = theta2(1) + theta2(2)*X;
+    plot(ax(2), X, y2, '-', "color", color2);
   endif
  
   [a, b] = plotInterval(X);

@@ -16,7 +16,7 @@ function plot2(X, Y1, Y2,
   varargin)
   
   # input parsing
-  fit    = "yes";
+  fit    = "no"; # does not fit by default
   color1 = "r";
   color2 = "b";
   marker1  = ".";
@@ -42,7 +42,7 @@ function plot2(X, Y1, Y2,
   h(1) = errorbar(X, Y1, X_err, X_err, Y1_err, Y1_err, "~>");
   h(2) = errorbar(X, Y2, X_err, X_err, Y2_err, Y2_err, "~>");
   
-  if (strcmp(fit, "yes")) # plot a exponential fit if requested
+  if (strcmp(fit, "exp")) # plot a exponential fit if requested
     # Polinomial Fit part
     x = linspace(min(X), max(X), 101);
     p1 = splinefit(X, Y1, breaks = 10);
@@ -53,6 +53,16 @@ function plot2(X, Y1, Y2,
     y2 = ppval(p2, x);
     plot(x, y2, '-', "color", color2);
     # End Polinomial Fit Part
+  endif
+  
+  if (strcmp(fit, "linear")) # plot a linear fit if requested
+    theta1 = linReg(X, Y1);
+    y1 = theta1(1) + theta1(2)*X;
+    plot(X, y1, '-', "color", color1);
+    
+    theta2 = linReg(X, Y2);
+    y2 = theta2(1) + theta2(2)*X;
+    plot(X, y2, '-', "color", color2);
   endif
   
   # Parameters part
