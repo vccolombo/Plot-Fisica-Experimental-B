@@ -1,14 +1,14 @@
 # Plota duas curvas, sendo Y1 o eixo Y da esquerda e Y2 o eixo Y da direita
-# tit = titulo
-# xl = Nome do eixo X
-# yl1 = Nome do eixo Y da esquerda
-# yl2 = Nome do eixo Y da direita
-# leg1 = Legenda da curva Y1
-# leg2 = Legenda da curva Y2
-# color1 = Cor da curva Y1
-# color2 = Cor da curva Y2
-# marker1 = Simbolos dos pontos da curva Y1
-# marker2 = Simbolos dos pontos da curva Y2
+# tit = titulo / title
+# xl = Nome do eixo X / X axis label
+# yl1 = Nome do eixo Y da esquerda / left Y axis label
+# yl2 = Nome do eixo Y da direita / right Y axis label
+# leg1 = Legenda da curva Y1 / Y1 legend
+# leg2 = Legenda da curva Y2 / Y2 legend
+# color1 = Cor da curva Y1 / Y1 curve color
+# color2 = Cor da curva Y2 / Y2 curve color
+# marker1 = Simbolos dos pontos da curva Y1 / Y1 marker
+# marker2 = Simbolos dos pontos da curva Y2 / Y2 marker
 function plot2yy(X, Y1, Y2, 
   X_err, Y1_err, Y2_err, 
   tit, 
@@ -40,8 +40,9 @@ function plot2yy(X, Y1, Y2,
   # end of input parsing
   
   [ax, g1, g2] = plotyy(X, Y1, X, Y2);
-  set(ax, {'ycolor'}, {"k"; "k"});
-  set(g1, "linestyle", "none");
+  set(ax, {'ycolor'}, {"k"; "k"}); # set color of axis
+  # turn off 'point to point' connections:
+  set(g1, "linestyle", "none"); 
   set(g2, "linestyle", "none");
   
   
@@ -50,7 +51,6 @@ function plot2yy(X, Y1, Y2,
   h(2) = errorbar(ax(2), X, Y2, X_err, X_err, Y2_err, Y2_err, "~>");
   
   if (strcmp(fit, "exp")) # plot a exponential fit if requested
-    # Polinomial Fit part
     x = linspace(min(X), max(X), 101);
     p1 = splinefit(X, Y1, breaks = 10);
     y1 = ppval(p1, x);
@@ -59,7 +59,6 @@ function plot2yy(X, Y1, Y2,
     p2 = splinefit(X, Y2, breaks = 10);
     y2 = ppval(p2, x);
     plot(ax(2), x, y2, '-', "color", color2);
-    # End Polinomial Fit Part
   endif
   
   if (strcmp(fit, "linear")) # plot a linear fit if requested

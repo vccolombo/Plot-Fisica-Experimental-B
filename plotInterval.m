@@ -1,3 +1,4 @@
+# Calculate the interval of plot's X axis
 function [a, b] = plotInterval(X)
 # TODO correct interval
   L = 70;

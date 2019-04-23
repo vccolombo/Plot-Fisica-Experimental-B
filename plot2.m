@@ -1,13 +1,14 @@
 # Plota duas curvas, com Y1 e Y2 no mesmo eixo e escala
-# tit = titulo
-# xl = Nome do eixo X
-# yl1 = Nome do eixo Y
-# leg1 = Legenda da curva Y1
-# leg2 = Legenda da curva Y2
-# color1 = Cor da curva Y1
-# color2 = Cor da curva Y2
-# marker1 = Simbolos dos pontos da curva Y1
-# marker2 = Simbolos dos pontos da curva Y2
+# Plot two curves, Y1 and Y2 on the same axis and scale
+# tit = titulo / title
+# xl = Nome do eixo X / X axis label
+# yl1 = Nome do eixo Y da esquerda / left Y axis label
+# leg1 = Legenda da curva Y1 / Y1 legend
+# leg2 = Legenda da curva Y2 / Y2 legend
+# color1 = Cor da curva Y1 / Y1 curve color
+# color2 = Cor da curva Y2 / Y2 curve color
+# marker1 = Simbolos dos pontos da curva Y1 / Y1 marker
+# marker2 = Simbolos dos pontos da curva Y2 / Y2 marker
 function plot2(X, Y1, Y2, 
   X_err, Y1_err, Y2_err, 
   tit, 
@@ -43,7 +44,6 @@ function plot2(X, Y1, Y2,
   h(2) = errorbar(X, Y2, X_err, X_err, Y2_err, Y2_err, "~>");
   
   if (strcmp(fit, "exp")) # plot a exponential fit if requested
-    # Polinomial Fit part
     x = linspace(min(X), max(X), 101);
     p1 = splinefit(X, Y1, breaks = 10);
     y1 = ppval(p1, x);
@@ -52,7 +52,6 @@ function plot2(X, Y1, Y2,
     p2 = splinefit(X, Y2, breaks = 10);
     y2 = ppval(p2, x);
     plot(x, y2, '-', "color", color2);
-    # End Polinomial Fit Part
   endif
   
   if (strcmp(fit, "linear")) # plot a linear fit if requested
@@ -72,7 +71,7 @@ function plot2(X, Y1, Y2,
   xlabel(xl);
   xlim([a, b]);
   ylabel(yl);
-  legend(h, leg1, leg2); # TODO fix legend
+  legend(h, leg1, leg2); # TODO fix legend add curve legend
   set(h(1), 
     "color", color1,
     "marker", marker1,
