@@ -2,13 +2,15 @@
 # Plot two curves, Y1 and Y2 on the same axis and scale
 # tit = titulo / title
 # xl = Nome do eixo X / X axis label
-# yl1 = Nome do eixo Y da esquerda / left Y axis label
+# yl = Nome do eixo Y da esquerda / left Y axis label
 # leg1 = Legenda da curva Y1 / Y1 legend
 # leg2 = Legenda da curva Y2 / Y2 legend
+# varargin possible arguments:
 # color1 = Cor da curva Y1 / Y1 curve color
 # color2 = Cor da curva Y2 / Y2 curve color
 # marker1 = Simbolos dos pontos da curva Y1 / Y1 marker
 # marker2 = Simbolos dos pontos da curva Y2 / Y2 marker
+# grid = Desenhar o grid no plot / grid on/off
 function plot2(X, Y1, Y2, 
   X_err, Y1_err, Y2_err, 
   tit, 
@@ -22,6 +24,7 @@ function plot2(X, Y1, Y2,
   color2 = "b";
   marker1  = ".";
   marker2  = "o";
+  gridplot = "off";
   
   for argidx = 1:2:length(varargin)
     switch varargin{argidx}
@@ -35,6 +38,8 @@ function plot2(X, Y1, Y2,
         marker1 = varargin{argidx+1};
       case "marker2"
         marker2 = varargin{argidx+1};
+      case "grid"
+        gridplot = varargin{argidx+1};
     endswitch
   endfor 
   # end of input parsing
@@ -80,4 +85,8 @@ function plot2(X, Y1, Y2,
     "color", color2,
     "marker", marker2,
     "linestyle", "none");
+    
+  if (strcmp(gridplot, "on"))
+    grid on;
+  endif
 endfunction

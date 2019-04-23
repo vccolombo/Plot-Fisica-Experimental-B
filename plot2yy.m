@@ -14,7 +14,7 @@ function plot2yy(X, Y1, Y2,
   tit, 
   xl, yl1, yl2, 
   leg1, leg2, 
-  varargin = {})
+  varargin)
   
   # input parsing
   fit    = "no"; # does not fit by default
@@ -22,6 +22,7 @@ function plot2yy(X, Y1, Y2,
   color2 = "b";
   marker1  = ".";
   marker2  = "o";
+  griplot = "off";
   
   for argidx = 1:2:length(varargin)
     switch varargin{argidx}
@@ -35,6 +36,8 @@ function plot2yy(X, Y1, Y2,
         marker1 = varargin{argidx+1};
       case "marker2"
         marker2 = varargin{argidx+1};
+      case "grid"
+        gridplot = varargin{argidx+1};
     endswitch
   endfor 
   # end of input parsing
@@ -88,4 +91,7 @@ function plot2yy(X, Y1, Y2,
     "color", color2,
     "marker", marker2,
     "linestyle", "none");
+  if (strcmp(gridplot, "on"))
+    grid on;
+  endif
 endfunction
